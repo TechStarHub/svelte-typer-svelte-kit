@@ -219,7 +219,7 @@
             <h3 class="text-2xl font-bold mb-3">Write Here</h3>
             <h3 class="text-2xl font-medium mb-3">Time: {timeToString(time)}</h3>
         </div>
-        <textarea disabled={inputDisabled} on:input={handleOnchange} value={typedText} class="w-full rounded border-[#83A2FF]  outline outline-[#83A2FF] p-1" name="" id="" cols="40" rows="6" bind:this={textareaRef} ></textarea>
+        <textarea disabled={inputDisabled} on:input={handleOnchange} value={typedText} class={`w-full rounded border-[#83A2FF]  outline outline-[#83A2FF] p-1 text-${textSize} `} name="" id="" cols="40" rows="6" bind:this={textareaRef} ></textarea>
 
         <div class="w-full flex justify-between items-center">
             <h4 class="font-medium">Accuracy : {accuracy} %</h4>
