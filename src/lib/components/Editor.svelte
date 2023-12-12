@@ -86,11 +86,12 @@
         if (!isStarted && !isPaused) {
             isStarted = true;
             inputDisabled = false;
+            focusTextarea();
             return;
         }
         isPaused = !isPaused;
         inputDisabled = !inputDisabled;
-        textareaRef.focus();
+        focusTextarea();
     }
     
     // time interval for the timer
@@ -149,6 +150,12 @@
         textSize = value;
     }
     
+    // focus the textarea
+    function focusTextarea () {
+        setTimeout(() => {
+            textareaRef.focus();
+        },100);
+    }
     
     onMount(() => {
         resetEditor();
