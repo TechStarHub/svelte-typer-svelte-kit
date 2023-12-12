@@ -3,8 +3,9 @@
 export const prerender = true;
 export const ssr = true;
 
-import json from "./../data/paras.json";
+import json from "../../data/paras.json";
 /** @type {import('./$types').PageServerLoad} */
+
 export async function load() {
   return {
     paras: json,

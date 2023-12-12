@@ -1,17 +1,26 @@
 <script>
+    import Brandlogo from "./Brandlogo.svelte";
 </script>
 
-<header class="w-full px-6 py-4 mb-8" >
-    <a href="/" class="flex items-center gap-1">
-        <img src="/svelte.svg" class="svelte-logo " alt="">
-        <h1 class="text-2xl font-bold text-gray-800">
-            Typer
-        </h1>
+<header class="w-full px-6 py-4 mb-8 flex justify-between items-center " >
+    <a href="/" class="">
+        <Brandlogo />
     </a>
+    <nav class=" font-sans">
+        <ul class="flex gap-4">
+            <li class="text-md font-medium">
+                <a href="/">Home</a>
+            </li>
+            <li class="text-md font-medium">
+                <a href="/typer">Typer</a>
+            </li>
+            <li class="text-md font-medium">
+                <a href="/about">About</a>
+            </li>
+        </ul>
+    </nav>
 </header>
 
 <style>
-    header>a:hover .svelte-logo {
-        filter: drop-shadow(0px 0px 7px #EC8F5E);
-    }
+
 </style>
