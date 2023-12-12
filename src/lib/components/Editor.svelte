@@ -3,8 +3,13 @@
     import TyperResult from './TyperResult.svelte';
     import ToolTip from './ToolTip.svelte';
     import { onMount } from 'svelte';
+    import { timeToString,calculateWpm,createLetters } from '../../utils';
 
-    let givenText = "SvelteKit provides a filesystem router, server-side rendering (SSR), code-splitting, and hot module replacement (HMR) out of the box. It's built on top of Svelte and Node.js, and is compatible with the vast ecosystem of Node libraries.";
+    export let data;
+
+    let givenText ="Loading...";
+    let givenLetters = createLetters(givenText);
+
 
     let paraData = {}
     let typedText = "";
@@ -20,16 +25,7 @@
     let isStarted = false;
     let showParaInfo = false;
     
-    // create an array of letter objects from the givenText
-    /* @params text : string */
-    function createLetters (text) {
-        const letters = text.split("");
-        const result = [];
-        letters.forEach((letter,index) => {
-            result.push({letter:letter,isCorrect: undefined,idx: index});
-        });
-        return result;
-    }
+    
     // handle the input event
     function handleOnchange (event) {
         const { value } = event.target;
@@ -114,22 +110,8 @@
             
         },1000
     )
-    // time to string
-    function timeToString (time) {
-        const minutes = Math.floor(time/60);
-        const seconds = time%60;
-        return `${ minutes/10 < 1 ? `0${minutes}` : minutes}:${seconds/10<1 ? `0${seconds}` : seconds}`;
-    }
+   
 
-    // wpm calculating function
-    function calculateWpm () {
-        const words = typedText.split(" ").length;
-        const minutes = timeElapsed/60;
-        const wpm = Math.floor(words/minutes);
-        return wpm;
-    }
-
-    let givenLetters = createLetters(givenText);
 
     // function to reset the editor
     function resetEditor () {
@@ -138,22 +120,17 @@
         wpms = [];
         maxWpm = 0;
         accuracy = "00.00";
-        time = 120;
         timeElapsed = 0;
         inputDisabled = true;
         isCompleted = false;
         isPaused = false;
         isStarted = false;
-        fetch(`/data/paras.json`)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            const para = data[Math.floor(Math.random()*data.length)];
-            paraData = para;
-            time = para.time;
-            givenText = para.text;
-            givenLetters = createLetters(givenText);
-        })
+
+        const para = data.paras[Math.floor(Math.random()*data.paras.length)];
+        paraData = para;
+        time = para.time;
+        givenText = para.text;
+        givenLetters = createLetters(givenText);
     }
 
     // handle para info btn click

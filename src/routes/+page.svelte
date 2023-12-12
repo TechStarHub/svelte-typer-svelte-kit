@@ -1,6 +1,8 @@
 
 <script>
     import Editor from '$lib/components/Editor.svelte';
+    export let data
+    console.log(data);
 </script>
 
 <svelte:head>
@@ -8,4 +10,4 @@
 </svelte:head>
 
 
-<Editor />
+<Editor data={data} />
