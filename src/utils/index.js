@@ -8,7 +8,7 @@ export function timeToString(time) {
 }
 
 // wpm calculating function
-export function calculateWpm() {
+export function calculateWpm(typedText, timeElapsed) {
   const words = typedText.split(" ").length;
   const minutes = timeElapsed / 60;
   const wpm = Math.floor(words / minutes);

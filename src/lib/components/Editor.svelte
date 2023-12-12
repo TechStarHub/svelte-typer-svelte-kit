@@ -6,11 +6,14 @@
     import { timeToString,calculateWpm,createLetters } from '../../utils';
 
     export let data;
-
+    // textarea ref
+    let textareaRef;
+    
+    const textSizes =['sm','md','lg','xl','2xl']
+    let textSize = textSizes[3];
+    
     let givenText ="Loading...";
     let givenLetters = createLetters(givenText);
-
-
     let paraData = {}
     let typedText = "";
     let wpm = 0;
@@ -37,7 +40,7 @@
     function checkLetter (typedText) {
         const letters = typedText.split("");
         let idx = 0;
-
+        
         // for checking the correctness of the letters
         letters.forEach((letter,index) => {
             idx = index;
@@ -58,14 +61,14 @@
         if(letters.length === 0){
             givenLetters[0].isCorrect = undefined;
         }
-
+        
         // check for completion of the text
         if (givenLetters.length === letters.length || time === 0) {
             isCompleted = true;
             inputDisabled = true;
             console.log("completed");
         }
-
+        
         // calculate accuracy
         let correctLetters = 0;
         givenLetters.forEach(letter => {
@@ -87,8 +90,9 @@
         }
         isPaused = !isPaused;
         inputDisabled = !inputDisabled;
+        textareaRef.focus();
     }
-
+    
     // time interval for the timer
     const interval = setInterval(
         () => {
@@ -101,18 +105,14 @@
             if (!isPaused && isStarted) {
                 time--;
                 timeElapsed++;
-                wpm = calculateWpm();
+                wpm = calculateWpm(typedText,timeElapsed);
                 wpms.push(wpm);
                 if (wpm > maxWpm) {
                     maxWpm = wpm;
                 }
             }
-            
-        },1000
-    )
-   
-
-
+        },1000)
+        
     // function to reset the editor
     function resetEditor () {
         typedText = "";
@@ -125,26 +125,34 @@
         isCompleted = false;
         isPaused = false;
         isStarted = false;
-
+        
         const para = data.paras[Math.floor(Math.random()*data.paras.length)];
         paraData = para;
         time = para.time;
         givenText = para.text;
         givenLetters = createLetters(givenText);
     }
-
+    
     // handle para info btn click
     function handleParaInfoBtnClick () {
         showParaInfo = !showParaInfo;
     }
-
+    
     // on reset btn click
     function handleResetBtnClick () {
         resetEditor();
     }
-
+    
+    // change text size
+    function changeTextSize (event) {
+        const { value } = event.target;
+        textSize = value;
+    }
+    
+    
     onMount(() => {
         resetEditor();
+        console.log(textareaRef)
     });
 
 </script>
@@ -153,13 +161,27 @@
     <div class="mb-2">
         <div class="flex justify-between items-center">
             <h3 class="text-2xl font-bold text-center mb-2">Given Text</h3>
-            <ToolTip label="Reset Paragraph" >
-                <button on:click={handleResetBtnClick} class="hover:bg-slate-300 p-1 rounded hover:shadow transition-shadow ">
-                    <Icon icon="iconamoon:restart" class="w-6 h-6  text-slate-600 " />
-                </button>
-            </ToolTip>
+            <div class="flex items-center gap-3">
+                <div class="">
+                    <label for="" class="text-sm font-medium">Text Size : </label>
+                    <select on:input={changeTextSize} name="" id="" class="rounded text-sm outline outline-2 outline-[#83A2FF] bg-[#ccdff8]">
+                        {#each textSizes as size}
+                            {#if size === 'xl'}
+                                <option value={size} selected on:change={() => textSize = size} >{size}</option>
+                            {:else}
+                                <option value={size} on:change={() => textSize = size} >{size}</option>
+                            {/if}
+                        {/each}
+                    </select>
+                </div>
+                <ToolTip label="Reset Paragraph" >
+                    <button on:click={handleResetBtnClick} class="hover:bg-slate-300 p-1 rounded hover:shadow transition-shadow ">
+                        <Icon icon="iconamoon:restart" class="w-6 h-6  text-slate-600 " />
+                    </button>
+                </ToolTip>
+            </div>
         </div>
-        <p class="text-xl">
+        <p class={`text-${textSize}`}>
             {#each givenLetters as letter}
                 {#if letter.isCorrect === true}
                     <span class="letter text-green-500 ">{letter.letter}</span>
@@ -190,7 +212,7 @@
             <h3 class="text-2xl font-bold mb-3">Write Here</h3>
             <h3 class="text-2xl font-medium mb-3">Time: {timeToString(time)}</h3>
         </div>
-        <textarea disabled={inputDisabled} on:input={handleOnchange} value={typedText} class="w-full rounded border-[#83A2FF]  outline outline-[#83A2FF] p-1" name="" id="" cols="40" rows="6" ></textarea>
+        <textarea disabled={inputDisabled} on:input={handleOnchange} value={typedText} class="w-full rounded border-[#83A2FF]  outline outline-[#83A2FF] p-1" name="" id="" cols="40" rows="6" bind:this={textareaRef} ></textarea>
 
         <div class="w-full flex justify-between items-center">
             <h4 class="font-medium">Accuracy : {accuracy} %</h4>
