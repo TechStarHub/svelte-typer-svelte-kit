@@ -3,7 +3,7 @@
     import TyperResult from './TyperResult.svelte';
     import ToolTip from './ToolTip.svelte';
     import { onMount } from 'svelte';
-    import { timeToString,calculateWpm,createLetters } from '../../utils';
+    import { timeToString,calculateWpm,createLetters,calculateCpm } from '../../utils';
 
     export let data;
     // textarea ref
@@ -17,6 +17,7 @@
     let paraData = {}
     let typedText = "";
     let wpm = 0;
+    let cpm = 0;
     let wpms = [];
     let maxWpm = 0;
     let accuracy = "00.00";
@@ -107,6 +108,7 @@
                 time--;
                 timeElapsed++;
                 wpm = calculateWpm(typedText,timeElapsed);
+                cpm = calculateCpm(typedText,timeElapsed);
                 wpms.push(wpm);
                 if (wpm > maxWpm) {
                     maxWpm = wpm;
@@ -223,7 +225,10 @@
 
         <div class="w-full flex justify-between items-center">
             <h4 class="font-medium">Accuracy : {accuracy} %</h4>
-            <h4 class="font-medium">WPM : {wpm} </h4>
+            <span class="flex gap-2">
+                <h4 class="font-medium">WPM : {wpm} </h4>
+                <h4 class="font-medium">CPM : {cpm} </h4>
+            </span>
         </div>
 
         {#if isCompleted}
