@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="./static/svelte.svg" width="100" height="100">
+    <img src="https://github.com/TechStarHub/svelte-typer-svelte-kit/assets/85790967/d29317a1-bb7b-4bfd-80a4-d527a1fc5cc8" width="250">
     <h1>Svelte Typer</h1>
     <p>
         A simple typing practice app built with <b>Svelte Kit</b> and <b>Tailwind CSS</b>. Practice typing with a random paragraph with a random length. The app will calculate your typing speed and accuracy.
