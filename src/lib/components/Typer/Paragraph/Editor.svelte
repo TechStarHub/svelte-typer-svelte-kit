@@ -1,9 +1,9 @@
 <script>
     import Icon from '@iconify/svelte'
     import TyperResult from './TyperResult.svelte';
-    import ToolTip from './ToolTip.svelte';
+    import ToolTip from '../../ToolTip.svelte';
     import { onMount } from 'svelte';
-    import { timeToString,calculateWpm,createLetters,calculateCpm } from '../../utils';
+    import { timeToString,calculateWpm,createLetters,calculateCpm } from './../../../../utils';
 
     export let data;
     // textarea ref

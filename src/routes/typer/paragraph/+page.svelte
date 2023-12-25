@@ -1,5 +1,5 @@
 <script>
-    import Editor from '$lib/components/Editor.svelte';
+    import Editor from '$lib/components/Typer/Paragraph/Editor.svelte';
     export let data
 </script>
 
