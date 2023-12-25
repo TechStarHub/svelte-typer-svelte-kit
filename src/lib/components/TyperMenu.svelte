@@ -6,7 +6,7 @@
 <div class=" p-4 rounded w-[90vw] sm:w-[80vw] md:w-[60vw] ">
     <ul class="flex flex-col gap-2">
         <li class="py-2 px-4 0 rounded bg-white hover:skew-x-12 hover:shadow-lg hover:scale-105 transition-all duration-200">
-            <a href="/paragraph" class="w-full flex items-center justify-center gap-3">
+            <a href="typer/paragraph" class="w-full flex items-center justify-center gap-3">
                 <Icon icon="icon-park:paragraph-alphabet" class="w-8 h-8" />
                 <span class="text-gray-600 text-xl font-semibold ">Paragraph</span>
             </a>
