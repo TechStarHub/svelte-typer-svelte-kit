@@ -1,6 +1,6 @@
 
 <script>
-    import TyperMenu from '$lib/components/Typer/TyperMenu.svelte';
+    import TyperMenu from '$lib/components/Typer/TyperMenu/TyperMenu.svelte';
     export let data
 </script>
 
