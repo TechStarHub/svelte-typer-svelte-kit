@@ -26,3 +26,12 @@ export function createLetters(text) {
   });
   return result;
 }
+
+// wpm calculating function
+export function calculateCpm(typedText, timeElapsed) {
+  if (!typedText) return 0;
+  const words = typedText.length;
+  const minutes = timeElapsed / 60;
+  const cpm = Math.floor(words / minutes);
+  return cpm;
+}

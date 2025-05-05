@@ -14,6 +14,11 @@
         })
     })
 </script>
+
+<svelte:head>
+	<title>About | Svelte Typer</title>
+</svelte:head>
+
 <section class="container mx-auto  p-4 md:p-6 ">
     <div class="flex flex-col gap-4 bg-white p-4 md:p-6 rounded">
         <div class="border-b pb-2">

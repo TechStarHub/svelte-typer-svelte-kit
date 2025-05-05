@@ -1,6 +1,6 @@
 
 <script>
-    import Editor from '$lib/components/Editor.svelte';
+    import TyperMenu from '$lib/components/Typer/TyperMenu/TyperMenu.svelte';
     export let data
 </script>
 
@@ -9,4 +9,4 @@
 </svelte:head>
 
 
-<Editor data={data} />
+<TyperMenu data={data} />
